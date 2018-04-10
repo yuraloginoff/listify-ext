@@ -1,0 +1,104 @@
+:root {
+  --gutter: 14px;
+
+  --oc-gray-0: #f8f9fa;
+  --oc-gray-1: #f1f3f5;
+  --oc-gray-2: #e9ecef;
+  --oc-gray-3: #dee2e6;
+  --oc-gray-4: #ced4da;
+  --oc-gray-5: #adb5bd;
+  --oc-gray-6: #868e96;
+  --oc-gray-7: #495057;
+  --oc-gray-8: #343a40;
+  --oc-gray-9: #212529;
+}
+
+body {
+  padding: 50px;
+  font-size: 16px;
+  color: var(--oc-gray-8);
+  background-color: var(--oc-gray-3);
+}
+
+.wrap {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.wrap > div {
+  margin: 5px;
+}
+
+.item {
+  width: 250px;
+  background-color: #fff;
+  border-radius: 3px;
+  box-shadow: 0 1.5px 0 0 rgba(0, 0, 0, 0.1);
+  padding: 10px;
+}
+
+ul {
+  list-style-type: none;
+  padding: 0;
+}
+
+li {
+  display: flex;
+  padding: 5px 0;
+}
+
+li div {
+  padding: 0 5px;
+}
+
+li div.link {
+  max-width: 250px;
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}
+
+li a {
+  text-decoration: none;
+  font-size: 14px;
+  color: #333;
+}
+
+li a span {
+  transition: all 0.2s ease;
+}
+
+li a:hover span {
+  text-decoration: underline;
+}
+
+img {
+  width: 16px;
+}
+
+.edit {
+  display: inline-block;
+  width: 16px;
+  height: 16px;
+  position: relative;
+  top: 2px;
+  background: url("../images/edit.svg") 0 0 no-repeat;
+  text-indent: -9999px;
+  opacity: 0;
+  transition: all 0.2s ease;
+}
+
+.icon {
+  background-repeat: no-repeat;
+  background-position: center;
+  display: block;
+  -webkit-background-size: cover;
+  background-size: cover;
+  width: 16px;
+  height: 16px;
+}
+
+li:hover .edit,
+p:hover .edit {
+  opacity: 1;
+}
