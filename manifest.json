@@ -1,7 +1,7 @@
 {
   "name": "Listify",
   "description": "Override the new tab page with your favorite links grouped in lists.",
-  "version": "2.2.0",
+  "version": "2.0.0",
   "manifest_version": 2,
   "chrome_url_overrides": {
     "newtab": "index.html"
