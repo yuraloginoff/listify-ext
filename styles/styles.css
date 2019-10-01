@@ -20,6 +20,18 @@ body {
   background-color: var(--oc-gray-3);
 }
 
+body.dark {
+  color: var(--oc-gray-3);
+  background-color: var(--oc-gray-8);
+}
+
+body.dark .item {
+  background-color: var(--oc-gray-7);
+}
+body.dark li a {
+  color: var(--oc-gray-3);
+}
+
 .wrap {
   column-count: 1;
   column-gap: 0;
@@ -81,6 +93,7 @@ li div.link {
   overflow: hidden;
   white-space: nowrap;
   text-overflow: ellipsis;
+  line-height: 1;
 }
 
 li a {
