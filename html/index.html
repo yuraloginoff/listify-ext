@@ -1,23 +1,50 @@
 <!DOCTYPE html>
-<html ng-app="app">
+<html>
   <head>
     <meta charset="utf-8" />
     <title>New Tab</title>
-    <link rel="stylesheet" href="styles/bootstrap.min.css" />
-    <link rel="stylesheet" href="styles/ui-bootstrap-custom-2.1.3-csp.css" />
-    <link rel="stylesheet" href="styles/styles.css" />
-    <script src="scripts/angular.min.js"></script>
-    <script src="scripts/angular-animate.min.js"></script>
-    <script src="scripts/ui-bootstrap-custom-2.1.3.min.js"></script>
-    <script src="scripts/ui-bootstrap-custom-tpls-2.1.3.min.js"></script>
-    <script src="scripts/app-index.js"></script>
+    <link rel="stylesheet" href="../styles/normalize.css">
+    <link rel="stylesheet" href="../styles/styles.css">
   </head>
-  <body ng-controller="MainCtrl" class="dark">
-    <div class="wrap">
-      <div
-        ng-repeat="group in groups track by $index"
-        ng-init="groupIndex = $index"
-      >
+
+  <body class="dark">
+    <script id="template" type="x-tmpl-mustache">
+
+        {{#groups}}
+          <div>
+            <div class="item">
+              <ul>
+                <p>{{title}} <a href class="edit">Edit</a></p>
+                {{#links}}
+                <li>
+                  <div>
+                    {{#favicon}}
+                      <a class="icon" href="{{url}}"
+                        style="background-image: url({{favicon}})"></a>
+                    {{/favicon}}
+                    {{^favicon}}
+                      <a class="icon" href="{{url}}"
+                        style="background-image: url('../images/star.svg')"></a>
+                    {{/favicon}}
+                  </div>
+                  <div class="link">
+                    <a href="{{url}}"><span>{{title}}</span></a>
+                  </div>
+                  <div>
+                    <a href class="edit">Edit</a>
+                  </div>
+                </li>
+                {{/links}}
+              </ul>
+            </div>
+          </div>
+        {{/groups}}
+
+    </script>
+    <main class="wrap" id="index"></main>
+
+    <!-- <div class="wrap">
+      <div>
         <div class="item">
           <ul>
             <p>
@@ -54,66 +81,8 @@
           </ul>
         </div>
       </div>
-    </div>
-
-    <script type="text/ng-template" id="editLinkModalContent.html">
-      <div class="modal-header">
-        <h3 class="modal-title" id="modal-title">Edit link</h3>
-      </div>
-
-      <form>
-        <div class="modal-body" id="modal-body">
-          <div class="form-group">
-            <label for="title">Title:</label>
-            <input type="text" ng-model="link.title"
-              class="form-control" placeholder="Link title" id="title">
-          </div>
-
-          <div class="form-group">
-            <label for="url">URL:</label>
-            <input type="text" ng-model="link.url"
-              class="form-control" placeholder="URL" id="url">
-          </div>
-        </div>
-
-        <div class="modal-footer">
-          <button type="button" class="btn btn-danger pull-left"
-            ng-click="delete()">Delete</button>
-
-          <button type="submit" class="btn btn-success"
-            ng-click="save()">Save</button>
-
-          <button type="button" class="btn btn-default"
-            ng-click="cancel()">Cancel</button>
-        </div>
-      </form>
-    </script>
-
-    <script type="text/ng-template" id="editGroupModalContent.html">
-      <div class="modal-header">
-        <h3 class="modal-title" id="modal-title">Edit list</h3>
-      </div>
-
-      <form>
-        <div class="modal-body" id="modal-body">
-          <div class="form-group">
-            <label for="grouptitle">Title:</label>
-            <input type="text" ng-model="group.title"
-              class="form-control" placeholder="Group title" id="grouptitle">
-          </div>
-        </div>
-
-        <div class="modal-footer">
-          <button type="button" class="btn btn-danger pull-left"
-            ng-click="delete()">Delete</button>
-
-          <button type="submit" class="btn btn-success"
-            ng-click="save()">Save</button>
-
-          <button type="button" class="btn btn-default"
-            ng-click="cancel()">Cancel</button>
-        </div>
-      </form>
-    </script>
+    </div> -->
+    <script src="../js/lib/mustache.js"></script>
+    <script src="../js/index.js"></script>
   </body>
 </html>
