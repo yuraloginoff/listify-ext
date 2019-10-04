@@ -1,88 +1,35 @@
 <!DOCTYPE html>
 <html>
-  <head>
-    <meta charset="utf-8" />
-    <title>New Tab</title>
-    <link rel="stylesheet" href="../styles/normalize.css">
-    <link rel="stylesheet" href="../styles/styles.css">
-  </head>
+<head>
+  <meta charset="utf-8" />
+  <title>New Tab</title>
+  <link rel="stylesheet" href="../css/styles.css">
+</head>
 
-  <body class="dark">
-    <script id="template" type="x-tmpl-mustache">
+<body class="dark">
+<script id="template" type="x-tmpl-mustache">
+{{#groups}}
+  <div class="group">
+    <p class="title">{{title}} <a href class="editlink">Edit</a></p>
+    <ul>
+      {{#links}}
+      <li>
+        <a href="{{url}}" class="textlink"
+          style="background-image:
+            {{#favicon}} url('{{favicon}}') {{/favicon}}
+            {{^favicon}} url('../images/star.svg') {{/favicon}}">{{title}}</a>
 
-        {{#groups}}
-          <div>
-            <div class="item">
-              <ul>
-                <p>{{title}} <a href class="edit">Edit</a></p>
-                {{#links}}
-                <li>
-                  <div>
-                    {{#favicon}}
-                      <a class="icon" href="{{url}}"
-                        style="background-image: url({{favicon}})"></a>
-                    {{/favicon}}
-                    {{^favicon}}
-                      <a class="icon" href="{{url}}"
-                        style="background-image: url('../images/star.svg')"></a>
-                    {{/favicon}}
-                  </div>
-                  <div class="link">
-                    <a href="{{url}}"><span>{{title}}</span></a>
-                  </div>
-                  <div>
-                    <a href class="edit">Edit</a>
-                  </div>
-                </li>
-                {{/links}}
-              </ul>
-            </div>
-          </div>
-        {{/groups}}
+        <a href class="editlink">Edit</a>
+      </li>
+      {{/links}}
+    </ul>
+  </div>
+{{/groups}}
+</script>
 
-    </script>
-    <main class="wrap" id="index"></main>
+<main class="wrap" id="index"></main>
 
-    <!-- <div class="wrap">
-      <div>
-        <div class="item">
-          <ul>
-            <p>
-              {{ group.title }}
-              <a href ng-click="openGroup(groupIndex)" class="edit">Edit</a>
-            </p>
-            <li ng-repeat="link in group.links track by $index">
-              <div>
-                <a
-                  class="icon"
-                  ng-if="link.favicon"
-                  ng-href="{{ link.url }}"
-                  ng-style="{'background-image':'url('+link.favicon+')'}"
-                ></a>
-
-                <a
-                  class="icon"
-                  ng-if="!link.favicon"
-                  ng-href="{{ link.url }}"
-                  ng-style="{'background-image':'url(images/star.svg)'}"
-                ></a>
-              </div>
-              <div class="link">
-                <a ng-href="{{ link.url }}" title="{{ link.title }}"
-                  ><span>{{ link.title }}</span></a
-                >
-              </div>
-              <div>
-                <a href ng-click="open($index, groupIndex)" class="edit"
-                  >Edit</a
-                >
-              </div>
-            </li>
-          </ul>
-        </div>
-      </div>
-    </div> -->
-    <script src="../js/lib/mustache.js"></script>
-    <script src="../js/index.js"></script>
-  </body>
+<script src="../js/lib/mustache.js"></script>
+<script src="../js/index.js"></script>
+</body>
 </html>
