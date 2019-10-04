@@ -1,3 +1,89 @@
+* {
+  box-sizing: border-box;
+}
 
+body {
+  padding: 18px;
+  font-size: 18px;
+  color: #343a40;
+  background-color: #dee2e6;
+}
 
-/*# sourceMappingURL=styles.css.map */
+.dark {
+  color: #dee2e6;
+  background-color: #343a40;
+}
+.dark .group {
+  background-color: #495057;
+}
+.dark .textlink {
+  color: #dee2e6;
+}
+
+.group {
+  width: 300px;
+  display: inline-block;
+  padding: 18px;
+  margin: 18px;
+  background-color: #fff;
+  box-shadow: 0 2px 0 0 rgba(0, 0, 0, 0.1);
+  border-radius: 3px;
+  break-inside: avoid;
+}
+.group .title {
+  font-size: 20px;
+  margin-top: 0;
+}
+
+ul {
+  list-style-type: none;
+  padding: 0;
+  margin: 0;
+}
+ul li {
+  display: flex;
+  padding: 9px 0;
+}
+ul li:hover .editlink {
+  opacity: 1;
+}
+
+.textlink {
+  display: block;
+  overflow: hidden;
+  white-space: nowrap;
+  line-height: 1;
+  padding-left: 34px;
+  background-position: 0 0;
+  background-repeat: no-repeat;
+  background-size: contain;
+  max-width: 248px;
+  transition: all 0.2s ease;
+  text-decoration: none;
+  transition: all 0.2s ease;
+}
+.textlink:hover {
+  text-decoration: underline;
+}
+
+.editlink {
+  display: inline-block;
+  width: 16px;
+  height: 16px;
+  position: relative;
+  left: 9px;
+  background: url("../images/edit.svg") 0 0 no-repeat;
+  text-indent: -9999px;
+  opacity: 0;
+  transition: all 0.2s ease;
+}
+
+.icon {
+  background-repeat: no-repeat;
+  background-position: center;
+  display: block;
+  -webkit-background-size: cover;
+  background-size: cover;
+  width: 16px;
+  height: 16px;
+}

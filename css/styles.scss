@@ -1,0 +1,108 @@
+$gutter: 18px;
+$group-width: 300px;
+$oc-gray-0: #f8f9fa;
+$oc-gray-1: #f1f3f5;
+$oc-gray-2: #e9ecef;
+$oc-gray-3: #dee2e6;
+$oc-gray-4: #ced4da;
+$oc-gray-5: #adb5bd;
+$oc-gray-6: #868e96;
+$oc-gray-7: #495057;
+$oc-gray-8: #343a40;
+$oc-gray-9: #212529;
+
+* {
+    box-sizing: border-box;
+}
+
+body {
+    padding: $gutter;
+    font-size: $gutter;
+    color: $oc-gray-8;
+    background-color: $oc-gray-3;
+}
+
+.dark {
+    color: $oc-gray-3;
+    background-color: $oc-gray-8;
+
+    .group {
+        background-color: $oc-gray-7;
+    }
+
+    .textlink {
+        color: $oc-gray-3;
+    }
+}
+
+.group {
+    width: $group-width;
+    display: inline-block;
+    padding: $gutter;
+    margin: $gutter;
+    background-color: #fff;
+    box-shadow: 0 2px 0 0 rgba(0, 0, 0, .1);
+    border-radius: 3px;
+    break-inside: avoid;
+
+    .title {
+        font-size: $gutter+2;
+        margin-top: 0;
+    }
+}
+
+ul {
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
+
+    li {
+        display: flex;
+        padding: $gutter/2 0;
+
+        &:hover .editlink {
+            opacity: 1;
+        }
+    }
+}
+
+.textlink {
+    display: block;
+    overflow: hidden;
+    white-space: nowrap;
+    line-height: 1;
+    padding-left: 16px+$gutter;
+    background-position: 0 0;
+    background-repeat: no-repeat;
+    background-size: contain;
+    max-width: $group-width - 16px - $gutter*2;transition: all 0.2s ease;
+    text-decoration: none;
+    transition: all 0.2s ease;
+
+    &:hover {
+        text-decoration: underline;
+    }
+}
+
+
+.editlink {
+    display: inline-block;
+    width: 16px;
+    height: 16px;
+    position: relative;
+    left: $gutter/2;
+    background: url("../images/edit.svg") 0 0 no-repeat;
+    text-indent: -9999px;
+    opacity: 0;
+    transition: all 0.2s ease;
+}
+
+.icon {
+    background-repeat: no-repeat;
+    background-position: center;
+    display: block;
+    -webkit-background-size: cover;
+    background-size: cover;
+    width: 16px;
+    height: 16px;
+}
