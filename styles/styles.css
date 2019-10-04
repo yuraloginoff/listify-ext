@@ -32,46 +32,15 @@ body.dark li a {
   color: var(--oc-gray-3);
 }
 
-.wrap {
-  column-count: 1;
-  column-gap: 0;
-}
-
-@media screen and (min-width: 500px) {
-  .wrap {
-    column-count: 2;
-  }
-}
-
-@media screen and (min-width: 600px) {
-  .wrap {
-    column-count: 3;
-  }
-}
-
-@media screen and (min-width: 800px) {
-  .wrap {
-    column-count: 4;
-  }
-}
-
-@media screen and (min-width: 1100px) {
-  .wrap {
-    column-count: 5;
-  }
-}
-
-.wrap > div {
-  box-sizing: border-box;
-  break-inside: avoid;
-  padding: var(--gutter);
-}
 
 .item {
   background-color: #fff;
   border-radius: 3px;
   box-shadow: 0 1.5px 0 0 rgba(0, 0, 0, 0.1);
   padding: var(--gutter);
+  box-sizing: border-box;
+  break-inside: avoid;
+  margin: var(--gutter);
 }
 
 ul {
