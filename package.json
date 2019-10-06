@@ -19,6 +19,7 @@
   },
   "homepage": "https://github.com/yuraloginoff/listify-ext#readme",
   "devDependencies": {
-    "eslint": "6.5.1"
+    "eslint": "6.5.1",
+    "jest": "24.9.0"
   }
 }
