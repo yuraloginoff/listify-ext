@@ -1,19 +1,9 @@
 "use strict"
 
+import * as db  from "./db.js";
+
 const mainTemplate = document.querySelector('#template').innerHTML
 const mainWrap = document.querySelector('#index')
-
-/**
- * Get all items from Chrome storage
- *
- * @returns Promise
- */
-function findAll() {
-  return new Promise(resolve =>
-    chrome.storage.local.get(data => resolve(data))
-  )
-}
-
 
 /**
  * Renders Mustache template using data from chrome storage
@@ -27,10 +17,9 @@ function renderTemplate(data, templateSrc, outputElem) {
   outputElem.innerHTML = Mustache.render(templateSrc, data)
 }
 
-
 /**
  * Gets data prmise and renders demplate
  */
-findAll().then(
+db.findAll().then(
   result => renderTemplate(result, mainTemplate, mainWrap)
 )
