@@ -3,7 +3,8 @@
 }
 
 body {
-  padding: 18px;
+  padding: 30px 0;
+  margin: 0;
   font-size: 18px;
   color: #343a40;
   background-color: #dee2e6;
@@ -21,10 +22,10 @@ body {
 }
 
 .group {
-  width: 300px;
+  width: 220px;
   display: inline-block;
   padding: 18px;
-  margin: 18px;
+  margin: 0;
   background-color: #fff;
   box-shadow: 0 2px 0 0 rgba(0, 0, 0, 0.1);
   border-radius: 3px;
@@ -57,7 +58,7 @@ ul li:hover .editlink {
   background-position: 0 0;
   background-repeat: no-repeat;
   background-size: contain;
-  max-width: 248px;
+  max-width: 168px;
   transition: all 0.2s ease;
   text-decoration: none;
   transition: all 0.2s ease;

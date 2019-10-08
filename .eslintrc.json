@@ -9,7 +9,8 @@
     "SharedArrayBuffer": "readonly",
     "angular": "readonly",
     "chrome": "readonly",
-    "Mustache": "readonly"
+    "Mustache": "readonly",
+    "MagicGrid": "readonly"
   },
   "parserOptions": {
     "ecmaVersion": 2018,

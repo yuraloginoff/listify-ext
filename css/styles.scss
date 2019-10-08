@@ -1,5 +1,7 @@
+
 $gutter: 18px;
-$group-width: 300px;
+$group-width: 220px;
+
 $oc-gray-0: #f8f9fa;
 $oc-gray-1: #f1f3f5;
 $oc-gray-2: #e9ecef;
@@ -16,7 +18,8 @@ $oc-gray-9: #212529;
 }
 
 body {
-    padding: $gutter;
+    padding: 30px 0;
+    margin: 0;
     font-size: $gutter;
     color: $oc-gray-8;
     background-color: $oc-gray-3;
@@ -39,7 +42,7 @@ body {
     width: $group-width;
     display: inline-block;
     padding: $gutter;
-    margin: $gutter;
+    margin: 0;
     background-color: #fff;
     box-shadow: 0 2px 0 0 rgba(0, 0, 0, .1);
     border-radius: 3px;
