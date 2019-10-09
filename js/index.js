@@ -24,6 +24,8 @@ function renderTemplate(data, templateSrc, outputElem) {
 db.findAll().then(
   result => {
     renderTemplate(result, mainTemplate, mainWrap)
+
+    // masonry layout
     magicGrid = new MagicGrid({
       container: ".wrap", // Required. Can be a class, id, or an HTMLElement
       static: true, // Required for static content. Default: false.
@@ -33,7 +35,6 @@ db.findAll().then(
       useTransform: true, // Optional. Position items using CSS transform. Default: True.
       animate: false // Optional. Animate item positioning. Default: false.
     })
-
     magicGrid.listen()
   }
 )
