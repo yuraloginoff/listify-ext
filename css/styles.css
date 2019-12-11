@@ -5,7 +5,7 @@
 body {
   padding: 30px 0;
   margin: 0;
-  font-size: 18px;
+  font-size: 16px;
   color: #343a40;
   background-color: #dee2e6;
 }
@@ -32,7 +32,7 @@ body {
   break-inside: avoid;
 }
 .group .title {
-  font-size: 20px;
+  font-size: 18px;
   margin-top: 0;
 }
 
@@ -43,10 +43,21 @@ ul {
 }
 ul li {
   display: flex;
-  padding: 9px 0;
+  padding: 8px 0;
+  position: relative;
 }
 ul li:hover .editlink {
   opacity: 1;
+}
+ul li:after {
+  content: "";
+  display: inline-block;
+  position: absolute;
+  top: 0;
+  right: 0;
+  height: 100%;
+  width: 40px;
+  background: linear-gradient(to right, rgba(73, 80, 87, 0) 0%, rgba(73, 80, 87, 0.7) 50%, #495057 100%);
 }
 
 .textlink {
@@ -54,12 +65,11 @@ ul li:hover .editlink {
   overflow: hidden;
   white-space: nowrap;
   line-height: 1;
-  padding-left: 34px;
+  padding-left: 24px;
   background-position: 0 0;
   background-repeat: no-repeat;
   background-size: contain;
-  max-width: 168px;
-  transition: all 0.2s ease;
+  max-width: 172px;
   text-decoration: none;
   transition: all 0.2s ease;
 }
@@ -72,11 +82,12 @@ ul li:hover .editlink {
   width: 16px;
   height: 16px;
   position: relative;
-  left: 9px;
+  left: 5px;
   background: url("../images/edit.svg") 0 0 no-repeat;
   text-indent: -9999px;
   opacity: 0;
   transition: all 0.2s ease;
+  z-index: 100;
 }
 
 .icon {

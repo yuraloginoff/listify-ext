@@ -1,5 +1,5 @@
 
-$gutter: 18px;
+$gutter: 16px;
 $group-width: 220px;
 
 $oc-gray-0: #f8f9fa;
@@ -41,7 +41,7 @@ body {
 .group {
     width: $group-width;
     display: inline-block;
-    padding: $gutter;
+    padding: 18px;
     margin: 0;
     background-color: #fff;
     box-shadow: 0 2px 0 0 rgba(0, 0, 0, .1);
@@ -62,9 +62,24 @@ ul {
     li {
         display: flex;
         padding: $gutter/2 0;
+        position: relative;
 
         &:hover .editlink {
             opacity: 1;
+        }
+
+        &:after{
+          content: "";
+          display: inline-block;
+          position: absolute;
+          top: 0; right: 0;
+          height: 100%;
+          width: 40px;
+          background: linear-gradient(to right,
+          rgba(73,80,87,0) 0%,
+          rgba(73,80,87,0.7) 50%,
+          rgba(73,80,87,1) 100%
+          );
         }
     }
 }
@@ -74,11 +89,11 @@ ul {
     overflow: hidden;
     white-space: nowrap;
     line-height: 1;
-    padding-left: 16px+$gutter;
+    padding-left: 16px+$gutter/2;
     background-position: 0 0;
     background-repeat: no-repeat;
     background-size: contain;
-    max-width: $group-width - 16px - $gutter*2;transition: all 0.2s ease;
+    max-width: $group-width - 16px - $gutter*2;
     text-decoration: none;
     transition: all 0.2s ease;
 
@@ -93,11 +108,12 @@ ul {
     width: 16px;
     height: 16px;
     position: relative;
-    left: $gutter/2;
+    left: 5px;
     background: url("../images/edit.svg") 0 0 no-repeat;
     text-indent: -9999px;
     opacity: 0;
     transition: all 0.2s ease;
+    z-index: 100;
 }
 
 .icon {
