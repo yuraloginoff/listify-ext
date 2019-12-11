@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html>
+
 <head>
   <meta charset="utf-8" />
   <title>New Tab</title>
@@ -7,30 +8,28 @@
 </head>
 
 <body class="dark">
-<script id="template" type="x-tmpl-mustache">
-{{#groups}}
-  <div class="group">
-    <p class="title">{{title}} <a href class="editlink">Edit</a></p>
-    <ul>
-      {{#links}}
-      <li>
-        <a href="{{url}}" class="textlink"
-          style="background-image:
-            {{#favicon}} url('{{favicon}}') {{/favicon}}
-            {{^favicon}} url('../images/star.svg') {{/favicon}}">{{title}}</a>
+  <script id="template" type="x-tmpl-mustache">
+  {{#groups}}
+    <div class="group">
+      <p class="title">{{title}}
+        <a href class="editlink js-edit-group" data-groupid="{{_id}}">Edit</a></p>
+      <ul>
+        {{#links}}
+        <li>
+          <a href="{{url}}" class="textlink" style="background-image:{{#favicon}} url('{{favicon}}') {{/favicon}}{{^favicon}} url('../images/star.svg') {{/favicon}}">{{title}}</a>
+          <a href class="editlink js-edit-link" data-groupid="{{_id}}" data-linkid="{{id}}">Edit</a>
+        </li>
+        {{/links}}
+      </ul>
+    </div>
+  {{/groups}}
+  </script>
 
-        <a href class="editlink">Edit</a>
-      </li>
-      {{/links}}
-    </ul>
-  </div>
-{{/groups}}
-</script>
+  <main class="wrap" id="index"></main>
 
-<main class="wrap" id="index"></main>
-
-<script src="../js/lib/mustache.js"></script>
-<script src="../js/lib/magic-grid.min.js"></script>
-<script src="../js/index.js" type="module"></script>
+  <script src="../js/lib/mustache.js"></script>
+  <script src="../js/lib/magic-grid.min.js"></script>
+  <script src="../js/index.js" type="module"></script>
 </body>
+
 </html>

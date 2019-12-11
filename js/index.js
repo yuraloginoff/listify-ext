@@ -1,19 +1,19 @@
 "use strict"
 
-import * as db  from "./db.js";
+import * as db from "./db.js";
 
 const mainTemplate = document.querySelector('#template').innerHTML
 const mainWrap = document.querySelector('#index')
 const gridSettings = {
   container: ".wrap", // Required. Can be a class, id, or an HTMLElement
   static: true, // Required for static content. Default: false.
-  gutter: 30, // Optional. Space between items. Default: 25(px).
+  // gutter: 30, // Optional. Space between items. Default: 25(px).
   maxColumns: 10, // Optional. Maximum number of columns. Default: Infinite.
   useMin: true, // Optional. Prioritize shorter columns when positioning items. Default: false.
   useTransform: true, // Optional. Position items using CSS transform. Default: True.
   animate: false // Optional. Animate item positioning. Default: false.
 }
-let grid
+
 /**
  * Renders Mustache template using data from chrome storage
  *
@@ -27,14 +27,37 @@ function renderTemplate(data, templateSrc, outputElem) {
 }
 
 /**
- * Gets data prmise and renders demplate
+ * Gets data promise and renders template
  */
 db.findAll().then(
   result => {
+    console.log(result);
     renderTemplate(result, mainTemplate, mainWrap)
+    bindEvents()
 
-    // masonry layout
-    grid = new MagicGrid(gridSettings)
+    // masonry-like layout
+    let grid = new MagicGrid(gridSettings)
     grid.listen()
   }
 )
+
+function bindEvents() {
+  // groups
+  document.querySelectorAll('.js-edit-group').forEach(function (link) {
+    link.addEventListener('click', function (e) {
+      e.preventDefault();
+      const groupId = this.getAttribute('data-groupid');
+      console.log(groupId);
+    });
+  });
+
+  // links
+  document.querySelectorAll('.js-edit-link').forEach(function (link) {
+    link.addEventListener('click', function (e) {
+      e.preventDefault();
+      const groupId = this.getAttribute('data-groupid');
+      const linkId = this.getAttribute('data-linkid');
+      console.log(groupId, linkId);
+    });
+  });
+}

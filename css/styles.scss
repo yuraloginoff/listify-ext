@@ -51,6 +51,10 @@ body {
     .title {
         font-size: $gutter+2;
         margin-top: 0;
+
+        &:hover .editlink {
+            opacity: 1;
+        }
     }
 }
 
