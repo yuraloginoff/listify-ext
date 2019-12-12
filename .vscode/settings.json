@@ -2,11 +2,17 @@
   "files.exclude": {
     "package-lock.json": true,
     "README.md": true,
-    ".vscode": true,
     "node_modules": true
   },
+  // "editor.defaultFormatter": "esbenp.prettier-vscode",
+  "editor.defaultFormatter": "dbaeumer.vscode-eslint",
+  "[json]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  },
   "editor.formatOnSave": true,
-  "prettier.tabWidth": 4,
-  "prettier.semi": false,
-  "prettier.requireConfig": true
+  "editor.formatOnPaste": false,
+  "eslint.enable": true,
+  "eslint.alwaysShowStatus": true,
+  "eslint.autoFixOnSave": true,
+  "json.format.enable": false
 }
