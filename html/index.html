@@ -25,6 +25,47 @@
   {{/groups}}
   </script>
 
+  <script id="group-modal-template" type="x-tmpl-mustache">
+    <div class="modal">
+      <div class="modal-dialog">
+        <div class="modal-head">
+          <h2 class="modal-title">Edit List</h2>
+        </div>
+        <div class="modal-body">
+          <label for="title">Title</label><br>
+          <input type="text" name="title" id="title" class="modal-input">
+        </div>
+        <div class="modal-footer">
+          <button type="submit" class="btn btn-success">Save</button>
+          <button type="button" class="btn btn-default">Cancel</button>
+          <button type="button" class="btn btn-danger">Delete</button>
+        </div>
+      </div>
+    </div>
+  </script>
+
+  <script id="link-modal-template" type="x-tmpl-mustache">
+    <div class="modal">
+      <div class="modal-dialog">
+        <div class="modal-head">
+          <h2 class="modal-title">Edit Link</h2>
+        </div>
+        <div class="modal-body">
+          <label for="title">Title</label><br>
+          <input type="text" name="title" id="title" class="modal-input">
+          <br><br>
+          <label for="url">Url</label><br>
+          <input type="text" name="url" id="url" class="modal-input">
+        </div>
+        <div class="modal-footer">
+          <button type="submit" class="btn btn-success">Save</button>
+          <button type="button" class="btn btn-default">Cancel</button>
+          <button type="button" class="btn btn-danger">Delete</button>
+        </div>
+      </div>
+    </div>
+  </script>
+
   <main class="wrap" id="index"></main>
 
   <script src="../js/lib/mustache.js"></script>
