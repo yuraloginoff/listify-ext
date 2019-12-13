@@ -1,76 +1,75 @@
 <!DOCTYPE html>
 <html>
+  <head>
+    <meta charset="utf-8" />
+    <title>New Tab</title>
+    <link rel="stylesheet" href="../css/styles.css" />
+  </head>
 
-<head>
-  <meta charset="utf-8" />
-  <title>New Tab</title>
-  <link rel="stylesheet" href="../css/styles.css">
-</head>
+  <body class="dark">
+    <script id="template" type="x-tmpl-mustache">
+      {{#groups}}
+        <div class="group">
+          <p class="title">{{title}}
+            <a href class="editlink js-edit-group" data-groupid="{{_id}}">Edit</a></p>
+          <ul>
+            {{#links}}
+            <li>
+              <a href="{{url}}" class="textlink" style="background-image:{{#favicon}} url('{{favicon}}') {{/favicon}}{{^favicon}} url('../images/star.svg') {{/favicon}}">{{title}}</a>
+              <a href class="editlink js-edit-link" data-groupid="{{_id}}" data-linkid="{{id}}">Edit</a>
+            </li>
+            {{/links}}
+          </ul>
+        </div>
+      {{/groups}}
+    </script>
 
-<body class="dark">
-  <script id="template" type="x-tmpl-mustache">
-  {{#groups}}
-    <div class="group">
-      <p class="title">{{title}}
-        <a href class="editlink js-edit-group" data-groupid="{{_id}}">Edit</a></p>
-      <ul>
-        {{#links}}
-        <li>
-          <a href="{{url}}" class="textlink" style="background-image:{{#favicon}} url('{{favicon}}') {{/favicon}}{{^favicon}} url('../images/star.svg') {{/favicon}}">{{title}}</a>
-          <a href class="editlink js-edit-link" data-groupid="{{_id}}" data-linkid="{{id}}">Edit</a>
-        </li>
-        {{/links}}
-      </ul>
-    </div>
-  {{/groups}}
-  </script>
-
-  <script id="group-modal-template" type="x-tmpl-mustache">
-    <div class="modal">
-      <div class="modal-dialog">
-        <div class="modal-head">
-          <h2 class="modal-title">Edit List</h2>
-        </div>
-        <div class="modal-body">
-          <label for="title">Title</label><br>
-          <input type="text" name="title" id="title" class="modal-input">
-        </div>
-        <div class="modal-footer">
-          <button type="submit" class="btn btn-success">Save</button>
-          <button type="button" class="btn btn-default">Cancel</button>
-          <button type="button" class="btn btn-danger">Delete</button>
-        </div>
-      </div>
-    </div>
-  </script>
-
-  <script id="link-modal-template" type="x-tmpl-mustache">
-    <div class="modal">
-      <div class="modal-dialog">
-        <div class="modal-head">
-          <h2 class="modal-title">Edit Link</h2>
-        </div>
-        <div class="modal-body">
-          <label for="title">Title</label><br>
-          <input type="text" name="title" id="title" class="modal-input">
-          <br><br>
-          <label for="url">Url</label><br>
-          <input type="text" name="url" id="url" class="modal-input">
-        </div>
-        <div class="modal-footer">
-          <button type="submit" class="btn btn-success">Save</button>
-          <button type="button" class="btn btn-default">Cancel</button>
-          <button type="button" class="btn btn-danger">Delete</button>
+    <script id="group-modal-template" type="x-tmpl-mustache">
+      <div class="modal">
+        <div class="modal-dialog">
+          <div class="modal-head">
+            <h2 class="modal-title">Edit List</h2>
+          </div>
+          <div class="modal-body">
+            <label for="title">Title</label><br>
+            <input type="text" name="title" id="title" class="modal-input" value="{{title}}">
+          </div>
+          <div class="modal-footer">
+            <button type="submit" class="btn btn-success">Save</button>
+            <button type="button" class="btn btn-default">Cancel</button>
+            <button type="button" class="btn btn-danger">Delete</button>
+          </div>
         </div>
       </div>
-    </div>
-  </script>
+    </script>
+    <script id="link-modal-template" type="x-tmpl-mustache">
+      <div class="modal">
+        <div class="modal-dialog">
+          <div class="modal-head">
+            <h2 class="modal-title">Edit Link</h2>
+          </div>
+          <div class="modal-body">
+            <label for="title">Title</label><br>
+            <input type="text" name="title" id="title" class="modal-input">
+            <br><br>
+            <label for="url">Url</label><br>
+            <input type="text" name="url" id="url" class="modal-input">
+          </div>
+          <div class="modal-footer">
+            <button type="submit" class="btn btn-success">Save</button>
+            <button type="button" class="btn btn-default">Cancel</button>
+            <button type="button" class="btn btn-danger">Delete</button>
+          </div>
+        </div>
+      </div>
+    </script>
 
-  <main class="wrap" id="index"></main>
+    <main class="wrap" id="index"></main>
 
-  <script src="../js/lib/mustache.js"></script>
-  <script src="../js/lib/magic-grid.min.js"></script>
-  <script src="../js/index.js" type="module"></script>
-</body>
+    <div id="modal-wrap"></div>
 
+    <script src="../js/lib/mustache.js"></script>
+    <script src="../js/lib/magic-grid.min.js"></script>
+    <script src="../js/index.js" type="module"></script>
+  </body>
 </html>

@@ -7,29 +7,40 @@
  */
 const findAll = () => {
   return new Promise(resolve =>
-    chrome.storage.local.get(data => resolve(data))
+    chrome.storage.local.get(null, data => {
+      console.log(data)
+      resolve(data)
+    })
   )
 }
 
-const set = (data) => {
-  chrome.storage.local.set(data, function () {
-    console.log('Saved');
-  });
+/**
+ * Get the group by ID from Chrome storage
+ *
+ * @returns Promise
+ */
+const findGroup = id => {
+  return new Promise(resolve =>
+    chrome.storage.local.get(null, data => {
+      resolve({
+        _id: data.groups[id]["_id"],
+        title: data.groups[id]["title"]
+      })
+    })
+  )
 }
 
-export { findAll };
+const set = data => {
+  chrome.storage.local.set(data, function() {
+    console.log("Saved")
+  })
+}
 
+export { findAll, findGroup }
 
-// chrome.storage.local.get(null, (data) => {
-//   data.groups.map((group, i) => {
-//     delete group.id;
-//     group._id = i
-//     // group.links.map((link, ind) => {
-//     //   link['id'] = ind
-//     // })
+// chrome.storage.local.get(null, data => {
+
+//   chrome.storage.local.set(data, function() {
+//     console.log("Saved!")
 //   })
-
-//   chrome.storage.local.set(data, function () {
-//     console.log('Saved');
-//   });
 // })

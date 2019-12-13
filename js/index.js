@@ -1,9 +1,9 @@
 "use strict"
 
-import * as db from "./db.js";
+import * as db from "./db.js"
 
-const mainTemplate = document.querySelector('#template').innerHTML
-const mainWrap = document.querySelector('#index')
+const mainTemplate = document.querySelector("#template").innerHTML
+const mainWrap = document.querySelector("#index")
 const gridSettings = {
   container: ".wrap", // Required. Can be a class, id, or an HTMLElement
   static: true, // Required for static content. Default: false.
@@ -13,6 +13,9 @@ const gridSettings = {
   useTransform: true, // Optional. Position items using CSS transform. Default: True.
   animate: false // Optional. Animate item positioning. Default: false.
 }
+const groupModalTemplate = document.querySelector("#group-modal-template")
+  .innerHTML
+const modalWrap = document.querySelector("#modal-wrap")
 
 /**
  * Renders Mustache template using data from chrome storage
@@ -26,38 +29,44 @@ function renderTemplate(data, templateSrc, outputElem) {
   outputElem.innerHTML = Mustache.render(templateSrc, data)
 }
 
+function bindEvents() {
+  // groups
+  document.querySelectorAll(".js-edit-group").forEach(function(link) {
+    link.addEventListener("click", function(e) {
+      e.preventDefault()
+      const groupId = this.getAttribute("data-groupid")
+
+      openModal(groupModalTemplate, modalWrap, groupId)
+    })
+  })
+
+  // links
+  document.querySelectorAll(".js-edit-link").forEach(function(link) {
+    link.addEventListener("click", function(e) {
+      e.preventDefault()
+      const groupId = this.getAttribute("data-groupid")
+      const linkId = this.getAttribute("data-linkid")
+      console.log(groupId, linkId)
+    })
+  })
+}
+
 /**
  * Gets data promise and renders template
  */
-db.findAll().then(
-  result => {
-    console.log(result);
-    renderTemplate(result, mainTemplate, mainWrap)
-    bindEvents()
+db.findAll().then(result => {
+  console.log(result)
 
-    // masonry-like layout
-    let grid = new MagicGrid(gridSettings)
-    grid.listen()
-  }
-)
+  renderTemplate(result, mainTemplate, mainWrap)
+  bindEvents()
 
-function bindEvents() {
-  // groups
-  document.querySelectorAll('.js-edit-group').forEach(function (link) {
-    link.addEventListener('click', function (e) {
-      e.preventDefault();
-      const groupId = this.getAttribute('data-groupid');
-      console.log(groupId);
-    });
-  });
+  // masonry-like layout
+  let grid = new MagicGrid(gridSettings)
+  grid.listen()
+})
 
-  // links
-  document.querySelectorAll('.js-edit-link').forEach(function (link) {
-    link.addEventListener('click', function (e) {
-      e.preventDefault();
-      const groupId = this.getAttribute('data-groupid');
-      const linkId = this.getAttribute('data-linkid');
-      console.log(groupId, linkId);
-    });
-  });
+function openModal(tmpl, outElem, groupId) {
+  db.findGroup(groupId).then(result => {
+    renderTemplate(result, tmpl, outElem)
+  })
 }
