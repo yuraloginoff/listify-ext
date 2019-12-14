@@ -8,7 +8,6 @@
 const findAll = () => {
   return new Promise(resolve =>
     chrome.storage.local.get(null, data => {
-      console.log(data)
       resolve(data)
     })
   )

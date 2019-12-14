@@ -135,6 +135,15 @@ ul {
 
 
 // MODAL
+.modal-wrap {
+  display: none;
+  transition: $transition;
+
+  &.open {
+    display: block;
+  }
+}
+
 .modal{
   display: flex;
   justify-content: center;

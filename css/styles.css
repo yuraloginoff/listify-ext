@@ -103,6 +103,14 @@ ul li:after {
   height: 16px;
 }
 
+.modal-wrap {
+  display: none;
+  transition: all 0.2s ease;
+}
+.modal-wrap.open {
+  display: block;
+}
+
 .modal {
   display: flex;
   justify-content: center;

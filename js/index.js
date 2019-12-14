@@ -68,5 +68,13 @@ db.findAll().then(result => {
 function openModal(tmpl, outElem, groupId) {
   db.findGroup(groupId).then(result => {
     renderTemplate(result, tmpl, outElem)
+    modalWrap.classList.add("open")
+
+    // close modal
+    outElem.querySelector(".js-cancel").addEventListener("click", function(e) {
+      e.preventDefault()
+      console.log(this)
+      modalWrap.classList.remove("open")
+    })
   })
 }
