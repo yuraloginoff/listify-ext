@@ -29,11 +29,11 @@ const findGroup = id => {
   )
 }
 
-const set = data => {
-  chrome.storage.local.set(data, function() {
-    console.log("Saved")
-  })
-}
+// const set = data => {
+//   chrome.storage.local.set(data, function() {
+//     console.log("Saved")
+//   })
+// }
 
 export { findAll, findGroup }
 
