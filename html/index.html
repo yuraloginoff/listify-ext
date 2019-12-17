@@ -27,18 +27,21 @@
     <script id="group-modal-template" type="x-tmpl-mustache">
       <div class="modal">
         <div class="modal-dialog">
-          <div class="modal-head">
-            <h2 class="modal-title">Edit List</h2>
-          </div>
-          <div class="modal-body">
-            <label for="title">Title</label><br>
-            <input type="text" name="title" id="title" class="modal-input" value="{{title}}">
-          </div>
-          <div class="modal-footer">
-            <button type="submit" class="btn btn-success">Save</button>
-            <button type="button" class="btn btn-default js-cancel">Cancel</button>
-            <button type="button" class="btn btn-danger">Delete</button>
-          </div>
+          <form name="group" method="post">
+            <div class="modal-head">
+              <h2 class="modal-title">Edit List</h2>
+            </div>
+            <div class="modal-body">
+              <input type="hidden" name="_id" value={{_id}}>
+              <label for="title">Title</label><br>
+              <input type="text" name="title" id="title" class="modal-input" value="{{title}}">
+            </div>
+            <div class="modal-footer">
+              <button type="submit" class="btn btn-success js-save">Save</button>
+              <button type="button" class="btn btn-default js-cancel">Cancel</button>
+              <button type="button" class="btn btn-danger js-drop">Delete</button>
+            </div>
+          </form>
         </div>
       </div>
     </script>

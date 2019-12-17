@@ -25,14 +25,15 @@ class Listify {
   }
 
   init() {
-    // Gets data (promise) and renders template
+    // Gets data (promise) and renders main template
     db.findAll().then(result => {
+      console.log(result)
+
       this.renderTemplate(result, this.conf.mainTemplate, this.conf.mainWrap)
       this.bindEvents()
 
-      // masonry-like layout
-      let grid = new MagicGrid(this.conf.gridSettings)
-      grid.listen()
+      this.grid = new MagicGrid(this.conf.gridSettings)
+      this.grid.listen()
     })
   }
 
@@ -50,6 +51,10 @@ class Listify {
 
   bindEvents() {
     const self = this
+
+    // chrome.storage.onChanged.addListener(() => {
+    //   this.init()
+    // })
 
     // groups
     document.querySelectorAll(".js-edit-group").forEach(function(link) {
@@ -86,11 +91,28 @@ class Listify {
       // close modal
       outElem
         .querySelector(".js-cancel")
-        .addEventListener("click", function(e) {
-          e.preventDefault()
-          self.conf.modalWrap.classList.remove("open")
-        })
+        .addEventListener("click", e => self.closeModal(e))
+
+      // save group
+      document.forms.group.addEventListener("submit", e =>
+        self.submitGroupModal(e)
+      )
     })
+  }
+
+  closeModal(e) {
+    e.preventDefault()
+    this.conf.modalWrap.classList.remove("open")
+  }
+
+  submitGroupModal(e) {
+    e.preventDefault()
+    const elems = this.elements
+    db.editGroup({
+      _id: elems._id.value,
+      title: elems.title.value
+    })
+    this.conf.modalWrap.classList.remove("open")
   }
 } // class Listify
 

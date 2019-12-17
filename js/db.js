@@ -29,17 +29,14 @@ const findGroup = id => {
   )
 }
 
-// const set = data => {
-//   chrome.storage.local.set(data, function() {
-//     console.log("Saved")
-//   })
-// }
+const editGroup = group => {
+  chrome.storage.local.get(null, data => {
+    data.groups[group._id]["title"] = group.title
 
-export { findAll, findGroup }
+    chrome.storage.local.set(data, function() {
+      console.log("Saved")
+    })
+  })
+}
 
-// chrome.storage.local.get(null, data => {
-
-//   chrome.storage.local.set(data, function() {
-//     console.log("Saved!")
-//   })
-// })
+export { findAll, findGroup, editGroup }
