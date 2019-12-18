@@ -10,7 +10,7 @@
     <script id="template" type="x-tmpl-mustache">
       {{#groups}}
         <div class="group">
-          <p class="title">{{title}}
+          <p class="title">{{_id}}. {{title}}
             <a href class="editlink js-edit-group" data-groupid="{{_id}}">Edit</a></p>
           <ul>
             {{#links}}
@@ -39,7 +39,7 @@
             <div class="modal-footer">
               <button type="submit" class="btn btn-success js-save">Save</button>
               <button type="button" class="btn btn-default js-cancel">Cancel</button>
-              <button type="button" class="btn btn-danger js-drop">Delete</button>
+              <button type="button" class="btn btn-danger js-delete">Delete</button>
             </div>
           </form>
         </div>

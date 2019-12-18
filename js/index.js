@@ -52,9 +52,9 @@ class Listify {
   bindEvents() {
     const self = this
 
-    // chrome.storage.onChanged.addListener(() => {
-    //   this.init()
-    // })
+    chrome.storage.onChanged.addListener(() => {
+      this.init()
+    })
 
     // groups
     document.querySelectorAll(".js-edit-group").forEach(function(link) {
@@ -88,31 +88,45 @@ class Listify {
       this.renderTemplate(result, tmpl, outElem)
       this.conf.modalWrap.classList.add("open")
 
-      // close modal
-      outElem
-        .querySelector(".js-cancel")
-        .addEventListener("click", e => self.closeModal(e))
+      this.bindGroupModalEvents(outElem)
+    })
+  }
 
-      // save group
-      document.forms.group.addEventListener("submit", e =>
-        self.submitGroupModal(e)
+  bindGroupModalEvents(outElem) {
+    // close modal
+    outElem
+      .querySelector(".js-cancel")
+      .addEventListener("click", e => this.closeModal(e))
+
+    // save group
+    document.forms.group.addEventListener("submit", e => {
+      this.submitGroup(e)
+    })
+
+    // delete group
+    outElem
+      .querySelector(".js-delete")
+      .addEventListener("click", e =>
+        this.deleteGroup(e, document.forms.group.elements._id.value)
       )
-    })
   }
 
-  closeModal(e) {
-    e.preventDefault()
+  closeModal(e = false) {
+    if (e) e.preventDefault()
     this.conf.modalWrap.classList.remove("open")
   }
 
-  submitGroupModal(e) {
+  submitGroup(e) {
     e.preventDefault()
-    const elems = this.elements
-    db.editGroup({
-      _id: elems._id.value,
-      title: elems.title.value
-    })
-    this.conf.modalWrap.classList.remove("open")
+    const elems = document.forms.group.elements
+    db.editGroup(elems._id.value, elems.title.value)
+    this.closeModal()
+  }
+
+  deleteGroup(e, id) {
+    e.preventDefault()
+    db.deleteGroup(id)
+    this.closeModal()
   }
 } // class Listify
 
