@@ -10,7 +10,7 @@
     <script id="template" type="x-tmpl-mustache">
       {{#groups}}
         <div class="group">
-          <p class="title">{{_id}}. {{title}}
+          <p class="title">{{title}}
             <a href class="editlink js-edit-group" data-groupid="{{_id}}">Edit</a></p>
           <ul>
             {{#links}}
@@ -49,21 +49,28 @@
     <script id="link-modal-template" type="x-tmpl-mustache">
       <div class="modal">
         <div class="modal-dialog">
+        <form name="link" method="post">
           <div class="modal-head">
             <h2 class="modal-title">Edit Link</h2>
           </div>
           <div class="modal-body">
+            <input type="hidden" name="id" value={{id}}>
+            <input type="hidden" name="groupId" value={{groupId}}>
+
             <label for="title">Title</label><br>
-            <input type="text" name="title" id="title" class="modal-input">
+            <input type="text" name="title" id="title" class="modal-input"
+            value="{{title}}">
             <br><br>
             <label for="url">Url</label><br>
-            <input type="text" name="url" id="url" class="modal-input">
+            <input type="text" name="url" id="url" class="modal-input"
+            value="{{url}}">
           </div>
           <div class="modal-footer">
-            <button type="submit" class="btn btn-success">Save</button>
-            <button type="button" class="btn btn-default">Cancel</button>
-            <button type="button" class="btn btn-danger">Delete</button>
+            <button type="submit" class="btn btn-success js-save">Save</button>
+              <button type="button" class="btn btn-default js-cancel">Cancel</button>
+              <button type="button" class="btn btn-danger js-delete">Delete</button>
           </div>
+        </form
         </div>
       </div>
     </script>

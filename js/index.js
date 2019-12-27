@@ -15,6 +15,7 @@ const Config = {
     animate: false // Animate item positioning
   },
   groupModalTemplate: document.querySelector("#group-modal-template").innerHTML,
+  linkModalTemplate: document.querySelector("#link-modal-template").innerHTML,
   modalWrap: document.querySelector("#modal-wrap")
 }
 
@@ -61,7 +62,6 @@ class Listify {
       link.addEventListener("click", function(e) {
         e.preventDefault()
         const groupId = this.getAttribute("data-groupid")
-
         self.openModal(
           self.conf.groupModalTemplate,
           self.conf.modalWrap,
@@ -71,25 +71,37 @@ class Listify {
     })
 
     // links
-    // document.querySelectorAll(".js-edit-link").forEach(function(link) {
-    //   link.addEventListener("click", function(e) {
-    //     e.preventDefault()
-    //     const groupId = this.getAttribute("data-groupid")
-    //     const linkId = this.getAttribute("data-linkid")
-    //     console.log(groupId, linkId)
-    //   })
-    // })
+    document.querySelectorAll(".js-edit-link").forEach(function(link) {
+      link.addEventListener("click", function(e) {
+        e.preventDefault()
+        const groupId = this.getAttribute("data-groupid")
+        const linkId = this.getAttribute("data-linkid")
+        self.openModal(
+          self.conf.linkModalTemplate,
+          self.conf.modalWrap,
+          groupId,
+          linkId
+        )
+      })
+    })
   }
 
-  openModal(tmpl, outElem, groupId) {
-    const self = this
-
-    db.findGroup(groupId).then(result => {
-      this.renderTemplate(result, tmpl, outElem)
-      this.conf.modalWrap.classList.add("open")
-
-      this.bindGroupModalEvents(outElem)
-    })
+  openModal(tmpl, outElem, groupId, linkId = false) {
+    if (linkId) {
+      // Link Modal
+      db.findLink(groupId, linkId).then(result => {
+        this.renderTemplate(result, tmpl, outElem)
+        this.conf.modalWrap.classList.add("open")
+        this.bindLinkModalEvents(outElem)
+      })
+    } else {
+      // Group Modal
+      db.findGroup(groupId).then(result => {
+        this.renderTemplate(result, tmpl, outElem)
+        this.conf.modalWrap.classList.add("open")
+        this.bindGroupModalEvents(outElem)
+      })
+    }
   }
 
   bindGroupModalEvents(outElem) {
@@ -111,6 +123,23 @@ class Listify {
       )
   }
 
+  bindLinkModalEvents(outElem) {
+    // close modal
+    outElem
+      .querySelector(".js-cancel")
+      .addEventListener("click", e => this.closeModal(e))
+
+    // save link
+    document.forms.link.addEventListener("submit", e => {
+      this.submitLink(e)
+    })
+
+    // delete link
+    outElem
+      .querySelector(".js-delete")
+      .addEventListener("click", e => this.deleteLink(e))
+  }
+
   closeModal(e = false) {
     if (e) e.preventDefault()
     this.conf.modalWrap.classList.remove("open")
@@ -123,9 +152,31 @@ class Listify {
     this.closeModal()
   }
 
+  submitLink(e) {
+    e.preventDefault()
+    const elems = document.forms.link.elements
+    db.editLink(
+      elems.id.value,
+      elems.groupId.value,
+      elems.title.value,
+      elems.url.value
+    )
+    this.closeModal()
+  }
+
   deleteGroup(e, id) {
     e.preventDefault()
     db.deleteGroup(id)
+    this.closeModal()
+  }
+
+  deleteLink(e) {
+    e.preventDefault();
+    const elems = document.forms.link.elements
+    db.deleteLink(
+      elems.id.value,
+      elems.groupId.value
+    )
     this.closeModal()
   }
 } // class Listify

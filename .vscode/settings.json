@@ -14,5 +14,8 @@
   "eslint.enable": true,
   "eslint.alwaysShowStatus": true,
   "eslint.autoFixOnSave": true,
-  "json.format.enable": false
+  "json.format.enable": false,
+  "editor.codeActionsOnSave": {
+    "source.fixAll.eslint": true
+  }
 }

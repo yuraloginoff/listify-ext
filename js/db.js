@@ -15,12 +15,11 @@ const findAll = () => {
 
 /**
  * Get the group by ID from Chrome storage
- *
+ * id -- string
  * @returns Promise
  */
 const findGroup = id => {
   id = parseInt(id, 10)
-
   return new Promise(resolve =>
     chrome.storage.local.get(null, data => {
       const group = data.groups.find(item => item._id === id)
@@ -32,6 +31,24 @@ const findGroup = id => {
   )
 }
 
+/**
+ * Get the link of group by ID from Chrome storage
+ * groupId, linkId -- strings
+ * @returns Promise
+ */
+const findLink = (groupId, linkId) => {
+  groupId = parseInt(groupId, 10)
+  linkId = parseInt(linkId, 10)
+  return new Promise(resolve =>
+    chrome.storage.local.get(null, data => {
+      const group = data.groups.find(item => item._id === groupId)
+      const link = group.links.find(item => item.id === linkId)
+      // console.log(group, link)
+      resolve(link)
+    })
+  )
+}
+
 const editGroup = (id, title) => {
   id = parseInt(id, 10)
 
@@ -39,6 +56,28 @@ const editGroup = (id, title) => {
     data.groups.map(item => {
       if (item._id === id) {
         data.groups[id]["title"] = title
+      }
+    })
+
+    chrome.storage.local.set(data, function() {
+      console.info("Saved")
+    })
+  })
+}
+
+const editLink = (linkId, groupId, title, url) => {
+  linkId = parseInt(linkId, 10)
+  groupId = parseInt(groupId, 10)
+
+  chrome.storage.local.get(null, data => {
+    data.groups.map(group => {
+      if (group._id === groupId) {
+        group.links.map(link => {
+          if (link.id === linkId) {
+            link.title = title
+            link.url = url
+          }
+        })
       }
     })
 
@@ -64,7 +103,37 @@ const deleteGroup = id => {
   })
 }
 
-export { findAll, findGroup, editGroup, deleteGroup }
+const deleteLink = (linkId, groupId) => {
+  linkId = parseInt(linkId, 10)
+  groupId = parseInt(groupId, 10)
+  console.log(linkId, groupId)
+
+  chrome.storage.local.get(null, data => {
+    data.groups.map(group => {
+      if (group._id === groupId) {
+        group.links.map((link, i) => {
+          if (link.id === linkId) {
+            group.links.splice(i, 1)
+          }
+        })
+      }
+    })
+
+    chrome.storage.local.set(data, function() {
+      console.info("Deleted")
+    })
+  })
+}
+
+export {
+  findAll,
+  findGroup,
+  editGroup,
+  deleteGroup,
+  findLink,
+  editLink,
+  deleteLink
+}
 
 /*
 chrome.storage.local.get(null, data => {
