@@ -1,0 +1,108 @@
+@import "open-color.scss";
+
+$transition: all 0.2s ease;
+$gutter: 16px;
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  font-size: $gutter;
+  padding: 0;
+  margin: 0;
+  color: $oc-gray-8;
+  background-color: $oc-gray-0;
+}
+
+h1, h2{
+  margin: 0;
+  font-weight: normal;
+  padding: 0 $gutter ($gutter / 2);
+}
+h1{
+  font-size: ($gutter + 4px);
+  margin-top: 10px;
+}
+h2{
+  font-size: $gutter+2px;
+}
+
+
+ul {
+  list-style-type: none;
+  padding: 0;
+  margin: 0;
+}
+
+a {
+  display: block;
+  color: $oc-gray-8;
+  padding: ($gutter/2) $gutter;
+  text-decoration: none;
+  transition: all 0.1s ease;
+}
+
+a:hover, a:focus {
+  background-color: $oc-gray-4;
+  text-decoration: none;
+}
+
+a:focus{
+  outline: 0;
+}
+
+.form {
+  margin-top: $gutter;
+  padding: 15px $gutter 20px;
+  background-color: $oc-gray-7;
+  color: $oc-gray-3;
+}
+
+form {
+  display: flex;
+  padding-top: 4px;
+}
+
+input, button {
+  font-size: 16px;
+  border: 1px solid $oc-gray-4;
+  background-color: $oc-gray-2;
+  border-radius: 3px;
+  padding: 10px;
+  transition: all 0.3s ease;
+  color: $oc-gray-7;
+}
+
+
+input:focus, button:focus{
+  border: 1px solid $oc-gray-6;
+  outline: 0;
+}
+
+button{
+  margin-left: $gutter/2;
+}
+
+
+.alert{
+  border: 1px solid;
+  padding: $gutter;
+  margin: $gutter $gutter 0;
+  font-weight: bold;
+  border-radius: 3px;
+  transition: $transition;
+  display: none;
+}
+
+.alert-success {
+  border-color: $oc-green-7;
+  color: $oc-green-7;
+  background-color: $oc-green-1;
+}
+
+.alert-danger {
+  border-color: $oc-red-7;
+  color: $oc-red-7;
+  background-color: $oc-red-1;
+}

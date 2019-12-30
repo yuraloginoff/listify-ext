@@ -1,41 +1,38 @@
 <!DOCTYPE html>
-<html lang="en" ng-app="popup">
-<head>
-  <meta charset="utf-8">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <link rel="stylesheet" href="styles/normalize.css">
-  <link rel="stylesheet" href="styles/popup.css">
-  <script src="scripts/angular.min.js"></script>
-  <script src="scripts/app-popup.js"></script>
-</head>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <link rel="stylesheet" href="../css/popup.css" />
+  </head>
 
-<body ng-controller="popupCtrl">
-  <h1>Add page to list:</h1>
-  <ul>
-    <li ng-repeat="group in groups track by $index">
-      <a href ng-click="saveToGroup($index)">{{group.title}}</a>
-    </li>
-  </ul>
+  <body>
+    <h1>Add page to list:</h1>
 
-  <hr>
+    <script id="main-template" type="x-tmpl-mustache">
+      <ul>
+        {{#groups}}
+          <li><a href="#" class="js-group-link" data-groupid={{_id}}>{{title}}</a></li>
+        {{/groups}}
+      </ul>
+    </script>
 
-  <h2>Create new list:</h2>
+    <div class="wrap" id="index"></div>
+    <div class="alert alert-success">
+      Saved!
+    </div>
+    <div class="alert alert-danger">
+      Error
+    </div>
 
-  <form ng-submit="addGroup()">
-    <input type="text"
-      ng-model="groupTitle"
-      placeholder=""
-      required>
+    <div class="form">
+      <span>Create new list:</span><br />
+      <form name="add">
+        <input name="title" type="text" placeholder="List title" required />
+        <button type="submit">Save</button>
+      </form>
+    </div>
 
-    <button type="submit">save</button>
-  </form>
-
-  <div ng-show="saved" class="alert alert-success" role="alert">
-    Saved!
-  </div>
-  <div ng-show="error" class="alert alert-danger" role="alert">
-    Error: {{error.message}}
-  </div>
-</body>
+    <script src="../js/lib/mustache.js"></script>
+    <script src="../js/popup.js" type="module"></script>
+  </body>
 </html>

@@ -28,8 +28,6 @@ class Listify {
   init() {
     // Gets data (promise) and renders main template
     db.findAll().then(result => {
-      console.log(result)
-
       this.renderTemplate(result, this.conf.mainTemplate, this.conf.mainWrap)
       this.bindEvents()
 
@@ -171,12 +169,9 @@ class Listify {
   }
 
   deleteLink(e) {
-    e.preventDefault();
+    e.preventDefault()
     const elems = document.forms.link.elements
-    db.deleteLink(
-      elems.id.value,
-      elems.groupId.value
-    )
+    db.deleteLink(elems.id.value, elems.groupId.value)
     this.closeModal()
   }
 } // class Listify
