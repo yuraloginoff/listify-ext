@@ -8,7 +8,6 @@
 const findAll = () => {
   return new Promise(resolve =>
     chrome.storage.local.get(null, data => {
-      console.log(data)
       resolve(data)
     })
   )
@@ -125,34 +124,37 @@ const deleteLink = (linkId, groupId) => {
   })
 }
 
-const insertLink = (groupId, cb) => {
+const insertLink = groupId => {
   groupId = parseInt(groupId, 10)
 
-  chrome.tabs.query(
-    {
-      active: true,
-      currentWindow: true
-    },
-    tabs => {
-      chrome.storage.local.get(null, data => {
-        data.groups.map(group => {
-          if (group._id === groupId) {
-            const newLink = {
-              url: tabs[0]["url"],
-              title: tabs[0]["title"],
-              favicon: tabs[0]["favIconUrl"],
-              groupId: groupId,
-              id: group.links.length + 1
+  return new Promise(resolve => {
+    chrome.tabs.query(
+      {
+        active: true,
+        currentWindow: true
+      },
+      tabs => {
+        chrome.storage.local.get(null, data => {
+          data.groups.map(group => {
+            if (group._id === groupId) {
+              const newLink = {
+                url: tabs[0]["url"],
+                title: tabs[0]["title"],
+                favicon: tabs[0]["favIconUrl"],
+                groupId: groupId,
+                id: group.links.length + 1
+              }
+              group.links.push(newLink)
             }
-            group.links.push(newLink)
-          }
+          })
+
+          chrome.storage.local.set(data, function() {
+            resolve(chrome.runtime.lastError)
+          })
         })
-        chrome.storage.local.set(data, function() {
-          cb(chrome.runtime.lastError)
-        })
-      })
-    }
-  )
+      }
+    )
+  })
 }
 
 export {

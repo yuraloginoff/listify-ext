@@ -4,7 +4,9 @@ import * as db from "./db.js"
 
 const Config = {
   mainTemplate: document.querySelector("#main-template").innerHTML,
-  mainWrap: document.querySelector("#index")
+  mainWrap: document.querySelector("#index"),
+  alertOk: document.querySelector(".alert-success"),
+  alertError: document.querySelector(".alert-danger")
 }
 
 class Popup {
@@ -36,19 +38,21 @@ class Popup {
     document.querySelectorAll(".js-group-link").forEach(link => {
       link.addEventListener("click", e => {
         e.preventDefault()
-        console.log(this)
         const groupId = link.getAttribute("data-groupid")
-        db.insertLink(groupId, this.showAlert)
+        db.insertLink(groupId).then(result => {
+          this.showAlert(result)
+        })
       })
     })
   }
 
   showAlert(error) {
     if (error) {
-      console.log("err")
+      this.conf.alertError.classList.add("open")
     } else {
-      console.log("Ok")
+      this.conf.alertOk.classList.add("open")
     }
+    setTimeout(window.close, 1000)
   }
 }
 

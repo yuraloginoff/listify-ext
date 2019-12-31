@@ -85,8 +85,6 @@ button {
   margin: 16px 16px 0;
   font-weight: bold;
   border-radius: 3px;
-  transition: all 0.2s ease;
-  display: none;
 }
 
 .alert-success {
@@ -99,4 +97,12 @@ button {
   border-color: #f03e3e;
   color: #f03e3e;
   background-color: #ffe3e3;
+}
+
+.alert-success, .alert-danger {
+  display: none;
+  transition: all 0.2s ease;
+}
+.alert-success.open, .alert-danger.open {
+  display: block;
 }
