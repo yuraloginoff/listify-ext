@@ -39,9 +39,17 @@ class Popup {
       link.addEventListener("click", e => {
         e.preventDefault()
         const groupId = link.getAttribute("data-groupid")
-        db.insertLink(groupId).then(result => {
+        db.addLink(groupId).then(result => {
           this.showAlert(result)
         })
+      })
+    })
+
+    document.forms.addgroup.addEventListener("submit", e => {
+      e.preventDefault()
+      db.addGroup(document.forms.addgroup.elements.title.value).then(result => {
+        console.error(result)
+        this.init()
       })
     })
   }

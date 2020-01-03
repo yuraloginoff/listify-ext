@@ -8,6 +8,7 @@
 const findAll = () => {
   return new Promise(resolve =>
     chrome.storage.local.get(null, data => {
+      console.log(data)
       resolve(data)
     })
   )
@@ -124,7 +125,7 @@ const deleteLink = (linkId, groupId) => {
   })
 }
 
-const insertLink = groupId => {
+const addLink = groupId => {
   groupId = parseInt(groupId, 10)
 
   return new Promise(resolve => {
@@ -142,7 +143,7 @@ const insertLink = groupId => {
                 title: tabs[0]["title"],
                 favicon: tabs[0]["favIconUrl"],
                 groupId: groupId,
-                id: group.links.length + 1
+                id: group.links.length
               }
               group.links.push(newLink)
             }
@@ -157,15 +158,32 @@ const insertLink = groupId => {
   })
 }
 
+const addGroup = title => {
+  return new Promise(resolve => {
+    chrome.storage.local.get(null, data => {
+      data.groups.push({
+        _id: data.groups.length,
+        title: title,
+        links: []
+      })
+
+      chrome.storage.local.set(data, function() {
+        resolve(chrome.runtime.lastError)
+      })
+    })
+  })
+}
+
 export {
   findAll,
   findGroup,
+  addGroup,
   editGroup,
   deleteGroup,
   findLink,
   editLink,
   deleteLink,
-  insertLink
+  addLink
 }
 
 /*
