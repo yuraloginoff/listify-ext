@@ -1,5 +1,23 @@
 "use strict"
 
+const defaults = {
+  groups: [
+    {
+      _id: 0,
+      title: "Default list",
+      links: [
+        {
+          id: 0,
+          groupId: 0,
+          url: "https://wikipedia.org",
+          title: "Wikipedia",
+          favicon: "https://ru.wikipedia.org/static/favicon/wikipedia.ico"
+        }
+      ]
+    }
+  ]
+}
+
 /**
  * Get all items from Chrome storage
  *
@@ -9,6 +27,12 @@ const findAll = () => {
   return new Promise(resolve =>
     chrome.storage.local.get(null, data => {
       console.log(data)
+      if (!data.groups) {
+        // if it's first run
+        chrome.storage.local.set(defaults, function() {
+          resolve(defaults)
+        })
+      }
       resolve(data)
     })
   )
@@ -143,7 +167,7 @@ const addLink = groupId => {
                 title: tabs[0]["title"],
                 favicon: tabs[0]["favIconUrl"],
                 groupId: groupId,
-                id: group.links.length
+                id: group.links.length + 1
               }
               group.links.push(newLink)
             }
@@ -162,7 +186,7 @@ const addGroup = title => {
   return new Promise(resolve => {
     chrome.storage.local.get(null, data => {
       data.groups.push({
-        _id: data.groups.length,
+        _id: data.groups.length + 1,
         title: title,
         links: []
       })
