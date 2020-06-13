@@ -26,7 +26,7 @@ const defaults = {
 const findAll = () => {
   return new Promise(resolve =>
     chrome.storage.local.get(null, data => {
-      console.log(data)
+      // console.log(data)
       if (!data.groups) {
         // if it's first run
         chrome.storage.local.set(defaults, function() {
@@ -80,7 +80,7 @@ const editGroup = (id, title) => {
   chrome.storage.local.get(null, data => {
     data.groups.map(item => {
       if (item._id === id) {
-        data.groups[id]["title"] = title
+        item["title"] = title
       }
     })
 
