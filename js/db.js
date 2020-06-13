@@ -167,7 +167,8 @@ const addLink = groupId => {
                 title: tabs[0]["title"],
                 favicon: tabs[0]["favIconUrl"],
                 groupId: groupId,
-                id: group.links.length + 1
+                // id: get id value of the last link. Increase it by 1.
+                id: group.links[group.links.length - 1]["id"] + 1
               }
               group.links.push(newLink)
             }
