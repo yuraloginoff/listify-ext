@@ -16,7 +16,8 @@ const Config = {
   },
   groupModalTemplate: document.querySelector("#group-modal-template").innerHTML,
   linkModalTemplate: document.querySelector("#link-modal-template").innerHTML,
-  modalWrap: document.querySelector("#modal-wrap")
+  modalWrap: document.querySelector("#modal-wrap"),
+  body: document.querySelector("body")
 }
 
 class Listify {
@@ -30,6 +31,10 @@ class Listify {
     db.findAll().then(result => {
       this.renderTemplate(result, this.conf.mainTemplate, this.conf.mainWrap)
       this.bindEvents()
+
+      if (result.settings.darktheme) {
+        this.conf.body.classList.add("dark")
+      }
 
       this.grid = new MagicGrid(this.conf.gridSettings)
       this.grid.listen()

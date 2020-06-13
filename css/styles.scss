@@ -39,6 +39,14 @@ body {
   .textlink {
     color: $oc-gray-3;
   }
+
+  ul li:after{
+    background: linear-gradient(to right,
+      rgba(73,80,87,0) 0%,
+      rgba(73,80,87,0.7) 50%,
+      rgba(73,80,87,1) 100%
+      );
+  }
 }
 
 .group {
@@ -83,9 +91,9 @@ ul {
       height: 100%;
       width: 40px;
       background: linear-gradient(to right,
-      rgba(73,80,87,0) 0%,
-      rgba(73,80,87,0.7) 50%,
-      rgba(73,80,87,1) 100%
+      rgba(255,255,255,0) 0%,
+      rgba(255,255,255,0.7) 50%,
+      rgba(255,255,255,1) 100%
       );
     }
   }

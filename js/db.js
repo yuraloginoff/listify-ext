@@ -33,6 +33,15 @@ const findAll = () => {
           resolve(defaults)
         })
       }
+      if (!data.settings) {
+        // add settings
+        data.settings = {
+          darktheme: false
+        }
+        chrome.storage.local.set(data, function() {
+          resolve(data)
+        })
+      }
       resolve(data)
     })
   )

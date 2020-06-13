@@ -19,6 +19,7 @@ function exportData() {
 var importFile = document.getElementById("importFile")
 var importStatus = document.getElementById("importStatus")
 importFile.addEventListener("change", importJob)
+
 document.getElementById("importBtn").onclick = function() {
   importFile.click()
 }
@@ -51,3 +52,23 @@ function _imp() {
 
   importFile.value = "" // clear input value after every import
 }
+
+// Dark theme
+document.querySelector("#darktheme").addEventListener("change", e => {
+  chrome.storage.local.get(null, data => {
+    data.settings.darktheme = e.target.checked
+    chrome.storage.local.set(data, function() {
+      console.log("Saved")
+    })
+  })
+})
+
+;(function(window, document) {
+  // if dark theme is enabled
+  // mark checkbox as "checked"
+  chrome.storage.local.get(null, data => {
+    if (data.settings.darktheme) {
+      document.querySelector("#darktheme").setAttribute("checked", "checked")
+    }
+  })
+})(window, document)
