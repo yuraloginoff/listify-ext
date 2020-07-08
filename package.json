@@ -6,7 +6,8 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "sass": "sass ./src/css/styles.scss ./src/css/styles.css --watch --no-source-map",
-    "sass-popup": "sass ./src/css/popup.scss ./src/css/popup.css --watch --no-source-map"
+    "sass-popup": "sass ./src/css/popup.scss ./src/css/popup.css --watch --no-source-map",
+    "build": "rm -rf ./dist/* && cp -vr ./src/* ./dist/ && rm -f ./dist/css/*.scss && echo 'Build finished!'"
   },
   "repository": {
     "type": "git",
