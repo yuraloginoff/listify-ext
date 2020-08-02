@@ -1,7 +1,7 @@
 @import "open-color.scss";
 
 
-$gutter: 16px;
+$k: 16px;
 $group-width: 220px;
 $transition: all 0.2s ease;
 
@@ -23,7 +23,7 @@ $transition: all 0.2s ease;
 body {
   padding: 30px 0;
   margin: 0;
-  font-size: $gutter;
+  font-size: $k;
   color: $oc-gray-8;
   background-color: $oc-gray-3;
 }
@@ -52,7 +52,7 @@ body {
 .group {
   width: $group-width;
   display: inline-block;
-  padding: 18px;
+  padding: $k;
   margin: 0;
   background-color: #fff;
   box-shadow: 0 2px 0 0 rgba(0, 0, 0, .1);
@@ -60,7 +60,7 @@ body {
   break-inside: avoid;
 
   .title {
-    font-size: $gutter+2;
+    font-size: $k+2;
     margin: 0 0 8px;
 
     &:hover .editlink {
@@ -76,7 +76,7 @@ ul {
 
   li {
     display: flex;
-    padding: $gutter/2 0;
+    padding: 0px 0;
     position: relative;
 
     &:hover .editlink {
@@ -104,11 +104,15 @@ ul {
   overflow: hidden;
   white-space: nowrap;
   line-height: 1;
-  padding-left: 16px+$gutter/2;
-  background-position: 0 0;
+  padding-top: 7px;
+  padding-right: 0;
+  padding-bottom: 7px;
+  padding-left: 16px+$k/2;
+  background-position: 0 7px;
   background-repeat: no-repeat;
-  background-size: contain;
-  max-width: $group-width - 16px - $gutter*2;
+  background-size: 16px;
+  max-width: $group-width - 16px - $k*2;
+  color: $oc-gray-8;
   text-decoration: none;
   transition: $transition;
 
@@ -123,12 +127,15 @@ ul {
   width: 16px;
   height: 16px;
   position: relative;
-  left: 5px;
+  left: 5px; top: 8px;
   background: url("../images/edit.svg") 0 0 no-repeat;
   text-indent: -9999px;
   opacity: 0;
   transition: $transition;
   z-index: 100;
+}
+.title .editlink {
+  top: 4px;
 }
 
 .icon {
