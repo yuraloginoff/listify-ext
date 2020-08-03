@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <link rel="stylesheet" href="../css/popup.css" />
+  </head>
+
+  <body>
+    <h1>Add page to list:</h1>
+
+    <script id="main-template" type="x-tmpl-mustache">
+      <ul>
+        {{#groups}}
+          <li><a href="#" class="js-group-link" data-groupid={{_id}}>{{title}}</a></li>
+        {{/groups}}
+      </ul>
+    </script>
+
+    <div class="wrap" id="index"></div>
+    <div class="alert alert-success">
+      Saved!
+    </div>
+    <div class="alert alert-danger">
+      Error
+    </div>
+
+    <div class="form">
+      <span>Create new list:</span><br />
+      <form name="addgroup">
+        <input name="title" type="text" placeholder="List title" required />
+        <button type="submit">Save</button>
+      </form>
+    </div>
+
+    <script src="../js/lib/mustache.js"></script>
+    <script src="../js/popup.js" type="module"></script>
+  </body>
+</html>

@@ -1,0 +1,246 @@
+@import "open-color.scss";
+
+
+$k: 16px;
+$group-width: 220px;
+$transition: all 0.2s ease;
+
+// $oc-gray-0: #f8f9fa;
+// $oc-gray-1: #f1f3f5;
+// $oc-gray-2: #e9ecef;
+// $oc-gray-3: #dee2e6;
+// $oc-gray-4: #ced4da;
+// $oc-gray-5: #adb5bd;
+// $oc-gray-6: #868e96;
+// $oc-gray-7: #495057;
+// $oc-gray-8: #343a40;
+// $oc-gray-9: #212529;
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  padding: 30px 0;
+  margin: 0;
+  font-size: $k;
+  color: $oc-gray-8;
+  background-color: $oc-gray-3;
+}
+
+.dark {
+  color: $oc-gray-3;
+  background-color: $oc-gray-8;
+
+  .group {
+    background-color: $oc-gray-7;
+  }
+
+  .textlink {
+    color: $oc-gray-3;
+  }
+
+  ul li:after{
+    background: linear-gradient(to right,
+      rgba(73,80,87,0) 0%,
+      rgba(73,80,87,0.7) 50%,
+      rgba(73,80,87,1) 100%
+      );
+  }
+}
+
+.group {
+  width: $group-width;
+  display: inline-block;
+  padding: $k;
+  margin: 0;
+  background-color: #fff;
+  box-shadow: 0 2px 0 0 rgba(0, 0, 0, .1);
+  border-radius: 3px;
+  break-inside: avoid;
+
+  .title {
+    font-size: $k+2;
+    margin: 0 0 8px;
+
+    &:hover .editlink {
+      opacity: 1;
+    }
+  }
+}
+
+ul {
+  list-style-type: none;
+  padding: 0;
+  margin: 0;
+
+  li {
+    display: flex;
+    padding: 0px 0;
+    position: relative;
+
+    &:hover .editlink {
+      opacity: 1;
+    }
+
+    &:after{
+      content: "";
+      display: inline-block;
+      position: absolute;
+      top: 0; right: 0;
+      height: 100%;
+      width: 40px;
+      background: linear-gradient(to right,
+      rgba(255,255,255,0) 0%,
+      rgba(255,255,255,0.7) 50%,
+      rgba(255,255,255,1) 100%
+      );
+    }
+  }
+}
+
+.textlink {
+  display: block;
+  overflow: hidden;
+  white-space: nowrap;
+  line-height: 1;
+  padding-top: 7px;
+  padding-right: 0;
+  padding-bottom: 7px;
+  padding-left: 16px+$k/2;
+  background-position: 0 7px;
+  background-repeat: no-repeat;
+  background-size: 16px;
+  max-width: $group-width - 16px - $k*2;
+  color: $oc-gray-8;
+  text-decoration: none;
+  transition: $transition;
+
+  &:hover {
+    text-decoration: underline;
+  }
+}
+
+
+.editlink {
+  display: inline-block;
+  width: 16px;
+  height: 16px;
+  position: relative;
+  left: 5px; top: 8px;
+  background: url("../images/edit.svg") 0 0 no-repeat;
+  text-indent: -9999px;
+  opacity: 0;
+  transition: $transition;
+  z-index: 100;
+}
+.title .editlink {
+  top: 4px;
+}
+
+.icon {
+  background-repeat: no-repeat;
+  background-position: center;
+  display: block;
+  -webkit-background-size: cover;
+  background-size: cover;
+  width: 16px;
+  height: 16px;
+}
+
+
+// MODAL
+.modal-wrap {
+  display: none;
+  transition: $transition;
+
+  &.open {
+    display: block;
+  }
+}
+
+.modal{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%; height: 100%;
+  position: fixed;
+  top: 0; left: 0;
+  background-color: rgba(0,0,0, 0.7);
+  z-index: 500;
+
+  .modal-dialog{
+    width: 480px;
+    padding: 20px;
+    background-color: $oc-gray-7;
+    color: $oc-gray-3;
+    border-radius: 5px;
+  }
+
+  .modal-head {
+    padding-bottom: 20px;
+    text-align: center;
+  }
+  .modal-title {
+    margin: 0;
+  }
+
+  .modal-body {
+    padding: 20px 0;
+  }
+
+  .modal-footer {
+    padding-top: 20px;
+
+    .btn:first-child{
+      margin-right: 10px;
+    }
+
+    .btn-danger {
+      float: right;
+    }
+  }
+
+  .modal-input {
+    width: 100%;
+    font-size: 18px;
+    padding: 10px;
+    margin-top: 5px;
+    border-radius: 5px;
+    border: none;
+  }
+}
+
+// BUTTONS
+.btn {
+  border: none;
+  font-size: 16px;
+  padding: 15px 20px;
+  line-height: 1;
+  border-radius: 3px;
+  transition: $transition;
+
+  &.btn-default {
+    color: $oc-gray-9;
+    background-color: $oc-gray-0;
+
+    &:hover { background-color: $oc-gray-3; }
+    &:active { background-color: $oc-gray-6; color: $oc-gray-0;}
+  }
+
+  &.btn-danger {
+    background-color: $oc-red-7;
+    color: $oc-gray-0;
+
+    &:hover { background-color: $oc-red-8; }
+    &:active { background-color: $oc-red-9; }
+  }
+
+  &.btn-success {
+    background-color: $oc-green-7;
+    color: $oc-gray-0;
+
+    &:hover { background-color: $oc-green-8; }
+    &:active { background-color: $oc-green-9; }
+  }
+}

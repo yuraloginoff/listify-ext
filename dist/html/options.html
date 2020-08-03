@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Listify Extension Options</title>
+    <style>
+      body {
+        font-size: 16px;
+      }
+    </style>
+  </head>
+
+  <body>
+    <h1>Settings</h1>
+
+    <p>
+      <input type="checkbox" name="darktheme" id="darktheme" />
+      <label for="darktheme">Enable dark theme</label>
+    </p>
+
+    <hr />
+
+    <h2>Export</h2>
+    <p>
+      Backup all links to file: <br />
+      <button id="export">Export</button>
+    </p>
+
+    <hr />
+
+    <h2>Import</h2>
+    <p>
+      Upload backup file: <br />
+      <input type="file" id="importFile" accept=".json" style="display:none" />
+      <button id="importBtn">Import</button>
+    </p>
+    <p id="importStatus"></p>
+
+    <script src="../js/options.js"></script>
+  </body>
+</html>
