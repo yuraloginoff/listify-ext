@@ -27,7 +27,7 @@ body {
 .group {
   width: 220px;
   display: inline-block;
-  padding: 18px;
+  padding: 16px;
   margin: 0;
   background-color: #fff;
   box-shadow: 0 2px 0 0 rgba(0, 0, 0, 0.1);
@@ -49,7 +49,7 @@ ul {
 }
 ul li {
   display: flex;
-  padding: 8px 0;
+  padding: 0px 0;
   position: relative;
 }
 ul li:hover .editlink {
@@ -71,11 +71,15 @@ ul li:after {
   overflow: hidden;
   white-space: nowrap;
   line-height: 1;
+  padding-top: 7px;
+  padding-right: 0;
+  padding-bottom: 7px;
   padding-left: 24px;
-  background-position: 0 0;
+  background-position: 0 7px;
   background-repeat: no-repeat;
-  background-size: contain;
+  background-size: 16px;
   max-width: 172px;
+  color: #343a40;
   text-decoration: none;
   transition: all 0.2s ease;
 }
@@ -89,11 +93,16 @@ ul li:after {
   height: 16px;
   position: relative;
   left: 5px;
+  top: 8px;
   background: url("../images/edit.svg") 0 0 no-repeat;
   text-indent: -9999px;
   opacity: 0;
   transition: all 0.2s ease;
   z-index: 100;
+}
+
+.title .editlink {
+  top: 4px;
 }
 
 .icon {
