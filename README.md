@@ -8,6 +8,7 @@ https://chrome.google.com/webstore/detail/listify/mlhjeoigdikenhhnaclhkmeajillni
 
 ## Changelog
 
+* v2.1.0 - Storage stats added; visual bug fix; new icon.
 * v2.0.2 - minor visual improvements
 * v2.0.1 - bug fix
 * v2.0.0 - completely rewritten extension on Vanilla JS. Dark theme added.

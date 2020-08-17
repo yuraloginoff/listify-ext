@@ -1,5 +1,7 @@
 "use strict"
 
+const db = chrome.storage.local
+
 const defaults = {
   groups: [
     {
@@ -25,11 +27,11 @@ const defaults = {
  */
 const findAll = () => {
   return new Promise((resolve) =>
-    chrome.storage.local.get(null, (data) => {
-      // console.log(data)
+    db.get(null, (data) => {
+      console.log(data)
       if (!data.groups) {
         // if it's first run
-        chrome.storage.local.set(defaults, function () {
+        db.set(defaults, function () {
           resolve(defaults)
         })
       }
@@ -38,7 +40,7 @@ const findAll = () => {
         data.settings = {
           darktheme: false
         }
-        chrome.storage.local.set(data, function () {
+        db.set(data, function () {
           resolve(data)
         })
       }
@@ -55,7 +57,7 @@ const findAll = () => {
 const findGroup = (id) => {
   id = parseInt(id, 10)
   return new Promise((resolve) =>
-    chrome.storage.local.get(null, (data) => {
+    db.get(null, (data) => {
       const group = data.groups.find((item) => item._id === id)
       resolve({
         _id: group._id,
@@ -74,7 +76,7 @@ const findLink = (groupId, linkId) => {
   groupId = parseInt(groupId, 10)
   linkId = parseInt(linkId, 10)
   return new Promise((resolve) =>
-    chrome.storage.local.get(null, (data) => {
+    db.get(null, (data) => {
       const group = data.groups.find((item) => item._id === groupId)
       const link = group.links.find((item) => item.id === linkId)
       // console.log(group, link)
@@ -86,14 +88,14 @@ const findLink = (groupId, linkId) => {
 const editGroup = (id, title) => {
   id = parseInt(id, 10)
 
-  chrome.storage.local.get(null, (data) => {
+  db.get(null, (data) => {
     data.groups.map((item) => {
       if (item._id === id) {
         item["title"] = title
       }
     })
 
-    chrome.storage.local.set(data, function () {
+    db.set(data, function () {
       console.info("Saved")
     })
   })
@@ -103,7 +105,7 @@ const editLink = (linkId, groupId, title, url) => {
   linkId = parseInt(linkId, 10)
   groupId = parseInt(groupId, 10)
 
-  chrome.storage.local.get(null, (data) => {
+  db.get(null, (data) => {
     data.groups.map((group) => {
       if (group._id === groupId) {
         group.links.map((link) => {
@@ -115,7 +117,7 @@ const editLink = (linkId, groupId, title, url) => {
       }
     })
 
-    chrome.storage.local.set(data, function () {
+    db.set(data, function () {
       console.info("Saved")
     })
   })
@@ -124,14 +126,14 @@ const editLink = (linkId, groupId, title, url) => {
 const deleteGroup = (id) => {
   id = parseInt(id, 10)
 
-  chrome.storage.local.get(null, (data) => {
+  db.get(null, (data) => {
     data.groups.map((item, i) => {
       if (item._id === id) {
         data.groups.splice(i, 1)
       }
     })
 
-    chrome.storage.local.set(data, function () {
+    db.set(data, function () {
       console.info("Deleted")
     })
   })
@@ -141,7 +143,7 @@ const deleteLink = (linkId, groupId) => {
   linkId = parseInt(linkId, 10)
   groupId = parseInt(groupId, 10)
 
-  chrome.storage.local.get(null, (data) => {
+  db.get(null, (data) => {
     data.groups.map((group) => {
       if (group._id === groupId) {
         group.links.map((link, i) => {
@@ -152,7 +154,7 @@ const deleteLink = (linkId, groupId) => {
       }
     })
 
-    chrome.storage.local.set(data, function () {
+    db.set(data, function () {
       console.info("Deleted")
     })
   })
@@ -168,7 +170,7 @@ const addLink = (groupId) => {
         currentWindow: true
       },
       (tabs) => {
-        chrome.storage.local.get(null, (data) => {
+        db.get(null, (data) => {
           data.groups.map((group) => {
             if (group._id === groupId) {
               const newLink = {
@@ -177,7 +179,7 @@ const addLink = (groupId) => {
                 favicon: tabs[0]["favIconUrl"],
                 groupId: groupId
               }
-              if (!!group.links.length) {
+              if (group.links.length) {
                 // id: get id value of the last link. Increase it by 1.
                 newLink.id = group.links[group.links.length - 1]["id"] + 1
               } else {
@@ -187,7 +189,7 @@ const addLink = (groupId) => {
             }
           })
 
-          chrome.storage.local.set(data, function () {
+          db.set(data, function () {
             resolve(chrome.runtime.lastError)
           })
         })
@@ -198,14 +200,14 @@ const addLink = (groupId) => {
 
 const addGroup = (title) => {
   return new Promise((resolve) => {
-    chrome.storage.local.get(null, (data) => {
+    db.get(null, (data) => {
       data.groups.push({
         _id: data.groups.length + 1,
         title: title,
         links: []
       })
 
-      chrome.storage.local.set(data, function () {
+      db.set(data, function () {
         resolve(chrome.runtime.lastError)
       })
     })
@@ -225,14 +227,14 @@ export {
 }
 
 /*
-chrome.storage.local.get(null, data => {
+db.get(null, data => {
   data.groups.map(gr => {
     gr.links.map((link, i) => {
       link.id = i
     })
   })
 
-  chrome.storage.local.set(data, function() {
+  db.set(data, function() {
     console.log("Saved")
   })
 })

@@ -9,11 +9,11 @@
   "[json]": {
     "editor.defaultFormatter": "esbenp.prettier-vscode"
   },
-  "editor.formatOnSave": true,
-  "editor.formatOnPaste": false,
+  "editor.formatOnSave": false,
+  "editor.formatOnPaste": true,
   "eslint.enable": true,
   "eslint.alwaysShowStatus": true,
-  "eslint.autoFixOnSave": true,
+  "eslint.autoFixOnSave": false,
   "json.format.enable": false,
   "editor.codeActionsOnSave": {
     "source.fixAll.eslint": true

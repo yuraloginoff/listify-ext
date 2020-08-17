@@ -2,7 +2,7 @@
 document.getElementById("export").addEventListener("click", exportData)
 
 function exportData() {
-  chrome.storage.local.get(null, function(items) {
+  chrome.storage.local.get(null, function (items) {
     var _data = JSON.stringify(items, null, 4) //indentation in json format, human readable
 
     var vLink = document.createElement("a"),
@@ -20,7 +20,7 @@ var importFile = document.getElementById("importFile")
 var importStatus = document.getElementById("importStatus")
 importFile.addEventListener("change", importJob)
 
-document.getElementById("importBtn").onclick = function() {
+document.getElementById("importBtn").onclick = function () {
   importFile.click()
 }
 
@@ -34,11 +34,11 @@ function importJob(e) {
 function _imp() {
   const _myImportedData = JSON.parse(this.result)
 
-  chrome.storage.local.get(function(data) {
+  chrome.storage.local.get(function (data) {
     let groupsArr = data.groups.concat(_myImportedData.groups)
     groupsArr.map((group, index) => {
       group._id = index
-      group.links.map(link => {
+      group.links.map((link) => {
         link.groupId = index
       })
     })
@@ -54,21 +54,29 @@ function _imp() {
 }
 
 // Dark theme
-document.querySelector("#darktheme").addEventListener("change", e => {
-  chrome.storage.local.get(null, data => {
+document.querySelector("#darktheme").addEventListener("change", (e) => {
+  chrome.storage.local.get(null, (data) => {
     data.settings.darktheme = e.target.checked
-    chrome.storage.local.set(data, function() {
+    chrome.storage.local.set(data, function () {
       console.log("Saved")
     })
   })
 })
-
-;(function(window, document) {
+;(function (window, document) {
   // if dark theme is enabled
   // mark checkbox as "checked"
-  chrome.storage.local.get(null, data => {
+  chrome.storage.local.get(null, (data) => {
     if (data.settings.darktheme) {
       document.querySelector("#darktheme").setAttribute("checked", "checked")
     }
   })
 })(window, document)
+
+// Storage stats
+chrome.storage.local.getBytesInUse(function (usedBytes) {
+  usedBytes = Math.round(usedBytes / 1024)
+  const totalBytes = chrome.storage.local.QUOTA_BYTES / 1024
+  const percentOfUsed = ((usedBytes * 100) / totalBytes).toFixed(2)
+  const message = `Used: ${usedBytes}kB (${percentOfUsed}%)<br>Total: ${totalBytes}kB`
+  document.querySelector(".js-storage-stats").innerHTML = message
+})
